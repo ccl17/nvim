@@ -2,9 +2,9 @@ local M = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "williamboman/mason.nvim",          build = ":MasonUpdate" },
+      { "williamboman/mason.nvim", build = ":MasonUpdate" },
       { "williamboman/mason-lspconfig.nvim" },
-      { "folke/neodev.nvim",                config = true },
+      { "folke/neodev.nvim", config = true },
       { "onsails/lspkind-nvim" },
     },
     opts = {
@@ -47,8 +47,10 @@ local M = {
       require("mason").setup()
 
       local tools = {
-        "golangci-lint",
+        "delve",
         "goimports",
+        "golangci-lint",
+        "gomodifytags",
         "stylua",
         "yamlfmt",
       }
@@ -136,6 +138,13 @@ local M = {
                   end,
                 })
               end
+
+              vim.keymap.set(
+                "n",
+                "<leader>gd",
+                "<cmd>lua require('dap-go').debug_test()<cr>",
+                { desc = "Debug current function", buffer = bufnr, noremap = true, silent = true }
+              )
             end,
             capabilities = lsp_capabilities,
             settings = opts.servers[server_name] and opts.servers[server_name].settings or {},
@@ -160,6 +169,35 @@ local M = {
           prefix = "",
         },
       })
+    end,
+  },
+  {
+    "crispgm/nvim-go",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("go").setup({
+        auto_format = false,
+        auto_lint = false,
+      })
+
+      local wk = require("which-key")
+      wk.register({
+        g = {
+          name = "Go",
+          h = {
+            name = "Helpers",
+            t = { "<cmd>GoAddTags<cr>", "Fill struct tags" },
+            T = { "<cmd>GoClearTags<cr>", "Remove struct tags" },
+          },
+          t = {
+            name = "Test",
+            a = { "<cmd>GoTestAll" },
+            c = { "<cmd>GoTestFunc<cr>", "Run test for current cursor position" },
+            f = { "<cmd>GoTestFile<cr>", "Run test for current file" },
+          },
+          T = { "<cmd>GoTestAll<cr>", "Run all tests" },
+        },
+      }, { prefix = "<leader>", mode = "n", { silent = true } })
     end,
   },
   {
@@ -324,7 +362,7 @@ local M = {
         sources = {
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
-          { name = "buffer",                 keyword_length = 5 },
+          { name = "buffer", keyword_length = 5 },
           { name = "luasnip" },
           { name = "path" },
         },

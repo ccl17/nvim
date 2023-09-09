@@ -58,6 +58,16 @@ local M = {
       map("n", "<C-w>=", "<Cmd>WindowsEqualize<CR>")
     end,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("indent_blankline").setup({
+        buftype_exclude = { "terminal", "nofile" },
+        char_list = { "|", "¦", "┆", "┊" },
+      })
+    end,
+  },
 }
 
 return M
