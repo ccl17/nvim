@@ -8,9 +8,7 @@ local M = {
     },
   },
   opts = {
-    options = {
-      theme = "gruvbox",
-    },
+    theme = "onedark",
   },
   config = true,
 }

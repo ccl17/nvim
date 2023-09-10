@@ -30,16 +30,16 @@ local M = {
         body = "<leader><leader>d",
         heads = {
           { "C", "<cmd>lua require('dapui').close()<cr>|:DapVirtualTextForceRefresh<cr>", { silent = true } },
-          { "E", "<cmd>lua require('dapui').eval()<cr>", { silent = true } },
-          { "K", "<cmd>lua require('dap.ui.widgets').hover()<cr>", { silent = true } },
-          { "X", dap.close, { silent = true } },
-          { "b", dap.toggle_breakpoint, { silent = true } },
-          { "c", dap.run_to_cursor, { silent = true } },
-          { "i", dap.step_into, { silent = true } },
-          { "n", dap.step_over, { silent = true } },
-          { "o", dap.step_out, { silent = true } },
-          { "u", "<cmd>lua require('dapui').toggle()<cr>", { silent = true } },
-          { "s", dap.continue, { silent = true } },
+          { "E", "<cmd>lua require('dapui').eval()<cr>",                                  { silent = true } },
+          { "K", "<cmd>lua require('dap.ui.widgets').hover()<cr>",                        { silent = true } },
+          { "X", dap.close,                                                               { silent = true } },
+          { "b", dap.toggle_breakpoint,                                                   { silent = true } },
+          { "c", dap.run_to_cursor,                                                       { silent = true } },
+          { "i", dap.step_into,                                                           { silent = true } },
+          { "n", dap.step_over,                                                           { silent = true } },
+          { "o", dap.step_out,                                                            { silent = true } },
+          { "u", "<cmd>lua require('dapui').toggle()<cr>",                                { silent = true } },
+          { "s", dap.continue,                                                            { silent = true } },
           {
             "x",
             "<cmd>lua require('dap').terminate()<cr>|:DapVirtualTextForceRefresh<cr>",
@@ -72,7 +72,7 @@ local M = {
         dapui.close({})
       end
 
-      require("dap-go").setup(ß)
+      require("dap-go").setup()
     end,
   },
   {
