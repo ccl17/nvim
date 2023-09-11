@@ -10,18 +10,21 @@ local M = {
     tag = "stable",
   },
   -- Navigation
+  -- {
+  --   "numToStr/Navigator.nvim",
+  --   config = function()
+  --     require("Navigator").setup({})
+  --     local map = vim.api.nvim_set_keymap
+  --     local default_options = { noremap = true, silent = true }
+  --     -- tmux navigation
+  --     map("n", "<C-h>", "<cmd>lua require('Navigator').left()<CR>", default_options)
+  --     map("n", "<C-k>", "<cmd>lua require('Navigator').up()<CR>", default_options)
+  --     map("n", "<C-l>", "<cmd>lua require('Navigator').right()<CR>", default_options)
+  --     map("n", "<C-j>", "<cmd>lua require('Navigator').down()<CR>", default_options)
+  --   end,
+  -- },
   {
-    "numToStr/Navigator.nvim",
-    config = function()
-      require("Navigator").setup({})
-      local map = vim.api.nvim_set_keymap
-      local default_options = { noremap = true, silent = true }
-      -- tmux navigation
-      map("n", "<C-h>", "<cmd>lua require('Navigator').left()<CR>", default_options)
-      map("n", "<C-k>", "<cmd>lua require('Navigator').up()<CR>", default_options)
-      map("n", "<C-l>", "<cmd>lua require('Navigator').right()<CR>", default_options)
-      map("n", "<C-j>", "<cmd>lua require('Navigator').down()<CR>", default_options)
-    end,
+    "christoomey/vim-tmux-navigator",
   },
   {
     "anuvyklack/windows.nvim",
@@ -31,10 +34,10 @@ local M = {
       "anuvyklack/animation.nvim",
     },
     opts = {
-      autowidth = { -- |windows.autowidth|
+      autowidth = {   -- |windows.autowidth|
         enable = true,
         winwidth = 5, -- |windows.winwidth|
-        filetype = { -- |windows.autowidth.filetype|
+        filetype = {  -- |windows.autowidth.filetype|
           help = 2,
         },
       },
