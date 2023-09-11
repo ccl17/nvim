@@ -2,9 +2,9 @@ local M = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "williamboman/mason.nvim",          build = ":MasonUpdate" },
+      { "williamboman/mason.nvim", build = ":MasonUpdate" },
       { "williamboman/mason-lspconfig.nvim" },
-      { "folke/neodev.nvim",                config = true },
+      { "folke/neodev.nvim", config = true },
       { "onsails/lspkind-nvim" },
     },
     opts = {
@@ -123,9 +123,9 @@ local M = {
         ["gopls"] = function(server_name)
           lsp_config[server_name].setup({
             on_attach = function(client, bufnr)
-              -- local inlayhints = require("lsp-inlayhints")
-              -- inlayhints.setup({ inlay_hints = { type_hints = { prefix = "=> " } } })
-              -- inlayhints.on_attach(client, bufnr)
+              local inlayhints = require("lsp-inlayhints")
+              inlayhints.setup({ inlay_hints = { type_hints = { prefix = "=> " } } })
+              inlayhints.on_attach(client, bufnr)
 
               lsp_attach(client, bufnr)
               if client.supports_method("textDocument/formatting") then
@@ -362,7 +362,7 @@ local M = {
         sources = {
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
-          { name = "buffer",                 keyword_length = 5 },
+          { name = "buffer", keyword_length = 5 },
           { name = "luasnip" },
           { name = "path" },
         },
