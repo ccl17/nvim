@@ -10,7 +10,11 @@ local M = {
   opts = {
     theme = "onedark",
   },
-  config = true,
+  config = function()
+    require("lualine").setup({
+      sections = { lualine_c = { { "filename", path = 1 } } },
+    })
+  end,
 }
 
 return M
