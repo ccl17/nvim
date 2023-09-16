@@ -48,7 +48,6 @@ local M = {
 
       local tools = {
         "delve",
-        "goimports",
         "golangci-lint",
         "gomodifytags",
         "stylua",
@@ -216,7 +215,6 @@ local M = {
           -- Linters
           nls.builtins.diagnostics.golangci_lint,
           -- Formatters
-          nls.builtins.formatting.goimports,
           nls.builtins.formatting.stylua.with({ extra_args = { "--indent-type", "Spaces", "--indent-width", "2" } }),
           nls.builtins.formatting.yamlfmt,
         },
