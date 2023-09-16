@@ -10,6 +10,20 @@ local api = vim.api
 -- don't auto comment new line
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
+local InitBufFormatOnSaveGrp = api.nvim_create_augroup("InitBufFormatOnSaveGrp", { clear = true })
+api.nvim_create_autocmd("BufReadPre", {
+  group = InitBufFormatOnSaveGrp,
+  callback = function()
+    vim.b.format_on_save = true
+    vim.keymap.set(
+      "n",
+      "<leader>fF",
+      "<cmd>lua vim.b.format_on_save = not vim.b.format_on_save<cr>",
+      { desc = "Toggle format on save", buffer = bufnr, noremap = true, silent = true }
+    )
+  end,
+})
+
 -- Highlight on yank
 api.nvim_create_autocmd("TextYankPost", {
   callback = function()

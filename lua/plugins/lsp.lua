@@ -125,18 +125,18 @@ local M = {
               local inlayhints = require("lsp-inlayhints")
               inlayhints.setup({ inlay_hints = { type_hints = { prefix = "=> " } } })
               inlayhints.on_attach(client, bufnr)
-
               lsp_attach(client, bufnr)
-              if client.supports_method("textDocument/formatting") then
-                local augroup = vim.api.nvim_create_augroup("GoplsFormatting", { clear = true })
-                vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-                  group = augroup,
-                  buffer = bufnr,
-                  callback = function()
+
+              local augroup = vim.api.nvim_create_augroup("GoplsFormatting", { clear = true })
+              vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                  if vim.b.format_on_save then
                     vim.lsp.buf.format({ group = augroup, buffer = bufnr })
-                  end,
-                })
-              end
+                  end
+                end,
+              })
 
               vim.keymap.set(
                 "n",
@@ -225,7 +225,9 @@ local M = {
               group = augroup,
               buffer = bufnr,
               callback = function()
-                vim.lsp.buf.format({ group = augroup, buffer = bufnr })
+                if vim.b.format_on_save then
+                  vim.lsp.buf.format({ group = augroup, buffer = bufnr })
+                end
               end,
             })
           end
