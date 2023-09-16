@@ -317,6 +317,19 @@ local M = {
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
 
+      -- luasnip forget current snippet when leaving insert mode
+      local unlink_snippet_group = vim.api.nvim_create_augroup("UnlinkSnippetGroup", { clear = true })
+      vim.api.nvim_create_autocmd("ModeChanged", {
+        group = unlink_snippet_group,
+        pattern = { "s:n", "i:*" },
+        desc = "Forget the current snippet when leaving insert mode",
+        callback = function(event)
+          if luasnip.session and luasnip.session.current_nodes[event.buf] and not luasnip.session.jump_active then
+            luasnip.unlink_current()
+          end
+        end,
+      })
+
       cmp.setup({
         formatting = {
           format = lspkind.cmp_format({
