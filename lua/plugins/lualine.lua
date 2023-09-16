@@ -14,7 +14,6 @@ local M = {
     require("lualine").setup({
       sections = {
         lualine_c = { { "filename", path = 1 } },
-        -- lualine_y = { function() vim.b.format_on_save end }
         lualine_y = {
           function()
             if vim.b.format_on_save then
