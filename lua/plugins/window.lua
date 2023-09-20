@@ -5,6 +5,12 @@ local M = {
       require("window-picker").setup({
         hint = "floating-big-letter",
         selection_chars = "asdfhjkl",
+        filter_rules = {
+          bo = {
+            filetype = { "neo-tree" },
+            buftype = { "help", "terminal", "nofile" },
+          },
+        },
       })
     end,
     tag = "stable",

@@ -136,6 +136,15 @@ local M = {
         color_devicons = true,
         use_less = true,
         set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+        get_selection_window = function()
+          local window_id = require("window-picker").pick_window({
+            filter_rules = {
+              include_current_win = true,
+            },
+          })
+          -- find a way to cancel without throwing error
+          return window_id or 0
+        end,
       },
     })
     telescope.load_extension("fzf")
