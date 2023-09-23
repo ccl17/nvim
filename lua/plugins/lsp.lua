@@ -132,9 +132,24 @@ local M = {
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
-                  if vim.b.format_on_save then
-                    vim.lsp.buf.format({ group = augroup, buffer = bufnr })
+                  if vim.b.format_on_save ~= true then
+                    return
                   end
+
+                  local params = vim.lsp.util.make_range_params()
+                  params.context = { only = { "source.organizeImports" } }
+
+                  local result = vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params)
+                  for cid, res in pairs(result or {}) do
+                    for _, r in pairs(res.result or {}) do
+                      if r.edit then
+                        local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                        vim.lsp.util.apply_workspace_edit(r.edit, enc)
+                      end
+                    end
+                  end
+
+                  vim.lsp.buf.format({ bufnr = bufnr, async = false })
                 end,
               })
 
