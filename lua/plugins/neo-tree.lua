@@ -16,6 +16,7 @@ local M = {
         hide_gitignored = false,
       },
       hijack_netrw_behavior = "disabled",
+      use_libuv_file_watcher = true,
     },
   },
   config = function(_, opts)
