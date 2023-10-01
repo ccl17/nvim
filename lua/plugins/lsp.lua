@@ -130,7 +130,7 @@ local M = {
               local augroup = vim.api.nvim_create_augroup("GoplsFormatting", { clear = true })
               vim.api.nvim_create_autocmd({ "BufWritePre" }, {
                 group = augroup,
-                buffer = bufnr,
+                pattern = { "*.go", "go.mod", "go.sum", "go.work" },
                 callback = function()
                   if vim.b.format_on_save ~= true then
                     return
