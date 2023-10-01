@@ -19,7 +19,7 @@ api.nvim_create_autocmd("BufReadPre", {
       "n",
       "<leader>fF",
       "<cmd>lua vim.b.format_on_save = not vim.b.format_on_save<cr>",
-      { desc = "Toggle format on save", buffer = bufnr, noremap = true, silent = true }
+      { desc = "Toggle format on save", noremap = true, silent = true }
     )
   end,
 })
