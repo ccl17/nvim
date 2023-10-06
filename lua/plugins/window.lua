@@ -26,10 +26,10 @@ local M = {
       "anuvyklack/animation.nvim",
     },
     opts = {
-      autowidth = {   -- |windows.autowidth|
+      autowidth = { -- |windows.autowidth|
         enable = true,
         winwidth = 5, -- |windows.winwidth|
-        filetype = {  -- |windows.autowidth.filetype|
+        filetype = { -- |windows.autowidth.filetype|
           help = 2,
         },
       },
@@ -94,6 +94,12 @@ local M = {
           vim.b.miniindentscope_disable = true
         end,
       })
+    end,
+  },
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup()
     end,
   },
 }
